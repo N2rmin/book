@@ -1,0 +1,110 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "version": "1"
+  },
+  "host": "localhost:4000",
+  "basePath": "/",
+  "paths": {
+    "/books": {
+      "get": {
+        "tags": [
+          "books"
+        ],
+        "operationId": "ListBook",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/BookRes"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "books"
+        ],
+        "operationId": "Book",
+        "parameters": [
+          {
+            "name": "Name",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/bookResponse"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Book": {
+      "type": "object",
+      "properties": {
+        "author": {
+          "type": "string",
+          "x-go-name": "Author"
+        },
+        "desc": {
+          "type": "string",
+          "x-go-name": "Desc"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Id"
+        },
+        "title": {
+          "type": "string",
+          "x-go-name": "Title"
+        }
+      },
+      "x-go-package": "crud/pkg/models"
+    }
+  },
+  "responses": {
+    "BookRes": {
+      "description": "",
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Book"
+        }
+      }
+    },
+    "bookResponse": {
+      "description": "",
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Book"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "api_key": []
+    }
+  ]
+}
